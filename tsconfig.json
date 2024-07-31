@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es2018",
+      "dom",
+    ],
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": [
+      "es6"
+    ],
+    "allowJs": true,
+    "outDir": "build",
+    "rootDir": "src",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "*.js",
+    "build",
+    "types.d.ts"
+  ],
+  "files": [
+    "types.d.ts",
+    "src/index.ts"
+  ]
+}

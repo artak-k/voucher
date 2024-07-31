@@ -1,0 +1,307 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Voucher API documentation",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/",
+    "tags": [
+        {
+            "name": "Admin",
+            "description": "Endpoints"
+        },
+        {
+            "name": "Voucher",
+            "description": "Endpoints"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "X-API-KEY",
+            "in": "header",
+            "description": "Enter the key."
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/admin/partner/add": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Should add new partner",
+                "description": "Add partner",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AddPartner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": {
+                            "status": true
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/partner/fill": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Should fill partner balance",
+                "description": "Fill partner balance",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FillPartnerBalance"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/partner/voucher/activate": {
+            "post": {
+                "tags": [
+                    "Voucher"
+                ],
+                "description": "Activate voucher",
+                "summary": "Should activate voucher",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ActivateVoucher"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/partner/voucher/create": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Voucher"
+                ],
+                "description": "Create vouchers",
+                "summary": "Should create vouchers",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateVoucher"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/partner/balance": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Should get partner balance",
+                "description": "Get partner vouchers",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/partner/vouchers": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Should get partner vouchers",
+                "description": "Get partner vouchers",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "schema": {
+                            "$ref": "#/definitions/VoucherStatus"
+                        }
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "schema": {
+                            "$ref": "#/definitions/VoucherCurrency"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "AddPartner": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "FillPartnerBalance": {
+            "properties": {
+                "currency": {
+                    "type": "string",
+                    "enum": ["RUB", "KZT", "EUR", "USD"]
+                },
+                "amount": {
+                    "type": "number"
+                },
+                "partnerId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "currency",
+                "amount",
+                "partnerId"
+            ]
+        },
+        "ActivateVoucher": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "code",
+                "userId"
+            ]
+        },
+        "CreateVoucher": {
+            "properties": {
+                "currency": {
+                    "type": "string",
+                    "enum": ["RUB", "KZT", "EUR", "USD"]
+                },
+                "count": {
+                    "type": "number"
+                },
+                "amount": {
+                    "type": "number"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "currency",
+                "amount",
+                "count"
+            ]
+        },
+        "VoucherStatus": {
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": ["UNUSED", "USED"]
+                }
+            }
+        },
+        "VoucherCurrency": {
+            "properties": {
+                "currency": {
+                    "type": "string",
+                    "enum": ["RUB", "KZT", "EUR", "USD"]
+                }
+            }
+        }
+    }
+}
